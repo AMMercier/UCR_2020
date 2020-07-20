@@ -1,0 +1,59 @@
+Question(s):
+Theoretical: Can I give bounds on some linear dynamics such as unbiased random walks (URW) and others that can be transformed into UBW?
+    o This would create not one Platonic sparsifier, but different sparsifiers for different dynamics. (Related ideas to community structure?)
+Experimental: How does the S-S algorithm compare/approximate various dynamics on different class of networks?
+    o Adaptive algorithms based in the S-S framework to help optimize this goal.
+
+TODO:
+[x](0.) Fix SI and SIR dynamics script
+        Anyways to make thsi faster?
+
+[0](2.) Finish Adapt2 with Hamming as obj function
+    (a.) Hamming sometimes no edges is better than an added edge...work from deletion?
+
+[0](3.) Finish MST and Infection Spanning Tree (IST) code
+    (a.) Create code to see prob of overlap
+    (b.) Create code to use this as measure of edge importance
+    (c.) Use the fraction of times an edge causes infection to create a matrix to replace R for edge importance. Try S-S algorithm then.
+
+[0](4.) Finish genetic algorithm
+
+[x](5.) Compare different centrality measures OG/SPS
+    (a.) Eigenvector centrality
+    (b.) R_eff centrality
+    (c.) Epidemic hitting time
+    (?.) ...
+    For four (Eigenvector, Closeness, Betweeness, and Degree) we find interesting propeties as more samples are taken.
+    Both closeness and degree grow like a logarithmic growth function, while the egienvector grows as log growth, and the betweenes as linear.
+
+[0](6.) Test general Lap/Flow-Graph using code.
+    (a.) Does a cursory check show that same (some of the same) properties hold?
+    (b.) Try with this as the Laplacian for the S-S algorithm, what happens?
+    (c.) If (a.) (b.) show anything interesting, give some mathematical rigor.
+
+Cris Moore Questions:
+[x](0.) How well does the S-S algorithm do spectrally, i.e. what epsilon does it achieve in approximating the Laplacian, for various random and real-world networks?
+        Considering, it does a very good job at approximating the quadratic Laplacian for real-world and random networks. The general Laplacian is a bit differnet - more tests should be run using ||*||_2/n.
+    (a.) Do you know how to calculate this epsilon? (2-norm might be easier)
+    (b.) How does varying the temperature in the S-S algorithm (sampling with probability Reff^beta where beta=1/T) affect #0?
+         Low temps decrease accuracy - however this was visualized with the x-axis being number of samples, not number of edges, so might be missleading.
+
+[0](1.) What about #0 where the objective function is average Hamming distance over time for the SI model?
+
+[0](2.) How about #0, #1, and #2 where we somehow recalculate Reff as we go?
+    (a.) When do we recalculate? At what steps and on what network?
+         Can try a sparsifier of a sparsifier.
+
+[0](3.) Given a graph G, I want a weighted graph with m edges that do a good job of approximating the Laplacian of G.
+    (a.) Use any method you want: simulated annealing, genetic, etc. How well can we do?
+
+[0](4.) Take #3 and instead optimize for accuracy with respect to the SI model instead of the Laplacian.
+    (a.) Use general Laplacian (Replicator) to do this?
+
+[0](5.) Try finding the joint distrubtion of the hamming distance between the intial and sparsifier networks.
+
+Maria Riolo Questions:
+[x](0.) How does something like variation of information work as a metric of difference in dynamics performance?
+    First findings not that great. Problem arises when all nodes are infected while timesteps increase.
+    This drives down VI, leading to potentially misleading results. Suggest that we stick with Hamming distance
+    and other dynamic specific metrics. Would like to try mutual information.
